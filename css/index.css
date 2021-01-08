@@ -1,0 +1,58 @@
+body{
+    font-family: 'Indie Flower', cursive;
+}
+a:hover{
+    cursor: pointer;
+}
+a.margenBoton{
+    margin-top: 40px;
+    margin-left: 40px;
+}
+
+.carritoP{
+    height: 350px;
+    overflow-y: scroll;
+}
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+/* Barra de scroll */
+::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 5px greenyellow;
+    border-radius: 10px;
+}
+::-webkit-scrollbar-thumb {
+    background: #0bf5f5;
+    border-radius: 5px;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: lightblue;
+}
+/* Mensaje inferior de cookies */
+.msgUsoCookie {
+    position: fixed;
+    z-index: 300;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 30px;
+    background-color: lightcoral;
+    color: white;
+    text-align: center;
+}
+
+/* Adaptación de letras */
+.letra-mediana{
+    font-size: 24px !important;
+}
+.letra-semimediana{
+    font-size: 20px !important;
+    font-weight: 800 !important;
+}
+.letra-negrita{
+    font-weight: bold !important;
+}
+.letra-roboco{
+    font-family: GillSans, Calibri, Trebuchet, sans-serif;
+}

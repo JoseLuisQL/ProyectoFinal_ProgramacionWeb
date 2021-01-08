@@ -1,0 +1,17 @@
+.error {
+    color: red !important;
+}
+.logo-admin {
+    margin-top: 90px;
+    margin-bottom: 90px;
+}
+.btn-menu {
+    width: 100%;
+}
+.btn-click:hover {
+    cursor: pointer;
+    background-color: lightgrey;
+}
+input{
+  caret-color: pink;
+}
