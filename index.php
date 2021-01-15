@@ -80,7 +80,10 @@
 			<li><a href="">Licencias de Software</a></li>
 		</ul>
 		
-
+		<div class="container">
+			<div class="contenido" style="background-color: #f7f7f7">
+			</div>
+		</div>
 		
 	</body>
 </html>

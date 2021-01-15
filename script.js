@@ -31,6 +31,65 @@ $(document).ready(function(){
 });
 
 
+function iniciarSesion(){
+    $.ajax({url: "form/login_vista.php",
+        success: function(result){
+            $(".contenido").html(result);
+        }
+    });
+    breadcrumControl(true,null,"Iniciar Sesión")
+}
+
+
+function comprobarDatos(){
+    var userLogin = $("#usuarioLogin").val();
+    var pass = $("#passwordLogin").val();
+    if(true){
+        $.ajax({
+            type: "GET",
+            url: "comprobarCredenciales.php",
+            data: {
+                usr: userLogin,
+                pass: pass
+            },
+            success: function( data ) {
+                data = JSON.parse(data);
+                if (data.cod == 200) {
+                    Materialize.toast(data.msg, 3000, 'green rounded');
+                    home();
+                    cargarPerfil();
+                } else {
+                    Materialize.toast(data.msg, 3000, 'red rounded');
+                }
+            }
+        })
+    }
+}
+
+function cerrarSesion(){
+    $.ajax({
+        type: "POST",
+        url: "comprobarCredenciales.php?exit",
+        success: function( response ) {
+            cargarPerfil();
+            Materialize.toast('¡Hasta pronto!', 3000, 'green rounded');
+            home();
+            cargarPerfil();
+        }
+    })
+}
+
+function registrarse(){
+    $.ajax({
+        type: "POST",
+        url: "form/registrarse_vista.php",
+        success: function( result ) {
+            $(".contenido").html(result);
+            breadcrumControl(true,null,"Registrarse");
+        }
+    })
+}
+
 
 
 
@@ -48,6 +107,22 @@ function home(){
     });
 }
 
+
+function limpiarBreadcrum(){
+    breadcrumControl(true);
+}
+
+
+
+function breadcrumControl(limpiar = null,plataforma = null, nombre = null){ 
+    if(limpiar != null) {
+        $("").remove();
+        $("").remove();
+        console.log("borro breadcrum");
+    }
+    
+
+}
 
 function cargarPerfil(){
     $.ajax({

@@ -9,7 +9,7 @@
 	<div class="container">
 		<h3>Inicia sesion</h3>
 		<p>Para disfrutar del contenido </p>
-		<a href="form/login_vista.php" class="btn">Iniciar</a>
+		<a onclick="iniciarSesion()" class="btn">Iniciar</a>
 		
 	</div>
 
@@ -41,5 +41,5 @@
 		</div>
 	<li><div class="divider"></div></li>
 	<li><a class="btn" onclick="">Ir a la cesta</a></li>
-	<li><a class="btn" onclick="">Cerrar Sesión</a></li>
+	<li><a class="btn" onclick="cerrarSesion()">Cerrar Sesión</a></li>
 <?php } ?>
