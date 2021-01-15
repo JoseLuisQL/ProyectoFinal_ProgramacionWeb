@@ -41,5 +41,5 @@
 		</div>
 	<li><div class="divider"></div></li>
 	<li><a class="btn" onclick="">Ir a la cesta</a></li>
-	<li><a class="btn" onclick="cerrarSesion()">Cerrar Sesión</a></li>
+	<li><a class="btn" onclick="">Cerrar Sesión</a></li>
 <?php } ?>
