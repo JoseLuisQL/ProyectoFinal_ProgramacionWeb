@@ -40,15 +40,10 @@
                 <center><input type="password" style="border-radius: 5px;" name="pass" id="passwordLogin"  placeholder="Contraseña"><center><br>
             </div>
 
-
-            <div>
-                <center><input type="password" style="border-radius: 5px;" name="contrasena_2" id="contrasena_2"  placeholder="Confirmar contraseña"><center><br>
-            </div>
-
             
             <center><button onclick="comprobarDatosRegistro()" class="col s12 btn btn-large waves-effect teal darken-1">Registrarse<label></label></button></center><br>
             
-            <center><em>¿Ya tienes cuenta? <a onclick="iniciarSesion()">Sign in</a></em></center><br><br>
+            <center><em>¿Ya tienes cuenta? <a onclick="iniciarSesion()">Iniciar Sesión</a></em></center><br><br>
 
             <center><a class="btn teal darken-1" onclick="iniciarSesion()">Volver</a>
             <a class="btn teal darken-1" onclick="home()">Inicio</a></center>

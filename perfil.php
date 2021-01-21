@@ -1,3 +1,4 @@
+
 <?php
 	session_start();
 	require 'acceso.php';
@@ -28,7 +29,6 @@
 
 	<?php
 		if($_SESSION["rol"] == "admin"){?>
-			<li><a class="letra-negrita"></a></li>
 			<li><a class="letra-negrita" href="admin" ><i class="material-icons">brightness_low</i>Administrar Web</a></li>
 		<?php } else  { ?>
 			<li><a class="letra-negrita" onclick=""><i class="material-icons">loyalty</i>Pedidos pendientes</a></li>
@@ -41,5 +41,6 @@
 		</div>
 	<li><div class="divider"></div></li>
 	<li><a class="btn" onclick="">Ir a la cesta</a></li>
-	<li><a class="btn" onclick="">Cerrar Sesión</a></li>
+	<li><a class="btn" onclick="cerrarSesion()">Cerrar Sesión</a></li>
 <?php } ?>
+

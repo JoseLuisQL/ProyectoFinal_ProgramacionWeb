@@ -1,39 +1,45 @@
-<?php 
-    require_once 'login.php';
-    $conexion = new mysqli($hn, $un, $pw, $db, $port);
-    if ($conexion->connect_error) die ("Fatal error");
 
-    if(isset($_POST['nombreUsuario']) && isset($_POST['contrasena']))
-    {
-        $iduser = mysql_entities_fix_string($conexion, $_POST['idUsuario']);
-        $nombre = mysql_entities_fix_string($conexion, $_POST['nombre']);
-        $apellido = mysql_entities_fix_string($conexion, $_POST['apellido']);
-        $email = mysql_entities_fix_string($conexion, $_POST['email']);
-        $username = mysql_entities_fix_string($conexion, $_POST['nombreUsuario']);
-        $pw_temp = mysql_entities_fix_string($conexion, $_POST['contrasena']);
-
-        $password = password_hash($pw_temp, PASSWORD_DEFAULT);
-
-        $query = "INSERT INTO usuario VALUES('$iduser','$username','$password','$nombre','$apellido','','','',999999999,0,'', '','$email')";
-
-        //echo $query;
-        $result = $conexion->query($query);
-        if (!$result) die ("Falló registro");
-
-        require 'form/exitoso.php';
-        
-    }
-    else
-    {
-        require 'form/signup_vista.php';
-    }
-    function mysql_entities_fix_string($conexion, $string)
-    {
-        return htmlentities(mysql_fix_string($conexion, $string));
-      }
-    function mysql_fix_string($conexion, $string)
-    {
-        if (get_magic_quotes_gpc()) $string = stripslashes($string);
-        return $conexion->real_escape_string($string);
-      }   
-?>
+<?php
+    
+    if((isset($_POST["usr"])) && (isset($_POST["pass"]))  && (isset($_POST["email"])) && (isset($_POST["nombre"])) && (isset($_POST["apellido"])) && (isset($_POST["telefono"]))
+     && ( $_POST["usr"] != "") && ( $_POST["pass"] != "" ) && ( $_POST["email"] != "") && ( $_POST["nombre"] != "") && ( $_POST["apellido"] != "") && ( $_POST["telefono"] != "") ){
+         
+         include 'conexion.php';
+         
+         $usuario = $bd->real_escape_string($_POST["usr"]) ;
+         $contrasena = $bd->real_escape_string($_POST["pass"]);
+         $email = $bd->real_escape_string($_POST["email"]);
+         $nombre = $bd->real_escape_string($_POST["nombre"]);
+         $apellido = $bd->real_escape_string($_POST["apellido"]);
+         $telefono = $bd->real_escape_string($_POST["telefono"]);
+         
+         $sql = "SELECT * FROM usuario WHERE nombreUsuario='$usuario';";
+         $reg = $bd->query($sql); 
+         if($reg->num_rows) {
+            echo '{"estado":"ko","msg":"¡Este nombre de usuario ya existe!"}';
+         } else {
+             $pass = md5($contrasena);
+             $fecha = date('YmdHis');
+             $sql = "INSERT INTO `usuario`(`idUsuario`, `nombre`,`apellido`,`telefono`, `nombreUsuario`, `contrasena`, `admin`, `fechaRegistro`, `email`) 
+             VALUES (NULL,'$nombre','$apellido','$telefono','$usuario','$pass',0,'$fecha','$email')";
+             $añadir = $bd->query($sql);
+             echo '{"estado":"ok","msg":"Listo!"}';
+ 
+         }
+         $bd->close();
+     } else {
+         echo '{"estado":"ko","msg":"¡Rellena todos los datos!"}';
+     }
+ 
+     function mysql_entities_fix_string($bd, $string)
+     {
+         return htmlentities(mysql_fix_string($bd, $string));
+       }
+     function mysql_fix_string($bd, $string)
+     {
+         if (get_magic_quotes_gpc()) $string = stripslashes($string);
+         return $bd->real_escape_string($string);
+       } 
+ 
+ ?>
+ 

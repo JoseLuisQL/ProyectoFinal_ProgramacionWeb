@@ -1,6 +1,7 @@
 <?php
     require 'conexion.php';
 
+
     class Acceso {
 
         
@@ -43,8 +44,9 @@
         
         public function desconectar(){
             
-            $_SESSION = [];
-            session_destroy();
+        $_SESSION = array();
+        setcookie(session_name(), '', time()-2592000, '/');
+        session_destroy();
         } 
 
         
@@ -52,5 +54,17 @@
             return (isset($_SESSION['id']))? true : false;
         }
 
-    }
+        function mysql_entities_fix_string($conexion, $string)
+    {
+        return htmlentities(mysql_fix_string($conexion, $string));
+      }
+    function mysql_fix_string($conexion, $string)
+    {
+        if (get_magic_quotes_gpc()) $string = stripslashes($string);
+        return $conexion->real_escape_string($string);
+      }  
+
+
+    } 
+
 ?>

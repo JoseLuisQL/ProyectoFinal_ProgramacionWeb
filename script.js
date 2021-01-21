@@ -13,12 +13,14 @@ $(document).ready(function(){
                                 '</div>'+
                             '</div></center>';
     home();
-    var tarjeta = false; 
+    var tarjeta = false;
+    
+    
 
     $('.perfil-navbar').sideNav({
-        menuWidth: 300,
+        menuWidth: 300, 
         edge: 'right', 
-        closeOnClick: true,
+        closeOnClick: true, 
         draggable: true, 
         onOpen: function(el) {  }, 
         onClose: function(el) {  }, 
@@ -30,7 +32,6 @@ $(document).ready(function(){
     cargarPerfil();
 });
 
-
 function iniciarSesion(){
     $.ajax({url: "form/login_vista.php",
         success: function(result){
@@ -39,7 +40,6 @@ function iniciarSesion(){
     });
     breadcrumControl(true,null,"Iniciar Sesión")
 }
-
 
 function comprobarDatos(){
     var userLogin = $("#usuarioLogin").val();
@@ -78,7 +78,6 @@ function cerrarSesion(){
         }
     })
 }
-
 function registrarse(){
     $.ajax({
         type: "POST",
@@ -90,8 +89,38 @@ function registrarse(){
     })
 }
 
+function comprobarDatosRegistro(){
+    var userLogin = $("#usuarioLogin").val();
+    var pass = $("#passwordLogin").val();
 
+    var emailLogin = $("#email").val();
+    var nameLogin = $("#nombre").val();
+    var aplLogin = $("#apellido").val();
+    var telfLogin = $("#telefono").val();
 
+    $.ajax({
+        type: "POST",
+        url: "signup.php",
+        data: {
+            usr: userLogin,
+            pass: pass,
+            email:emailLogin,
+            nombre:nameLogin,
+            apellido:aplLogin,
+            telefono:telfLogin
+        },
+        success: function( data ) {
+            data = JSON.parse(data);
+            if(data["estado"] == "ok"){
+                iniciarSesion();
+                Materialize.toast('¡Perfecto!', 3000, 'green rounded');
+                Materialize.toast('Ahora... ¡Inicia sesión!', 3000, 'green rounded');
+            }else{
+                Materialize.toast(data["msg"], 3000, 'red rounded');
+            }
+        }
+    })
+}
 
 function home(){
     $.ajax({
@@ -99,10 +128,8 @@ function home(){
         success: function(result){
             breadcrumControl(true);
             $(".contenido").html(result);
-            //Carrousel inicial
             $('.slider').slider();
 
-           
         }
     });
 }
@@ -124,6 +151,8 @@ function breadcrumControl(limpiar = null,plataforma = null, nombre = null){
 
 }
 
+
+
 function cargarPerfil(){
     $.ajax({
         url: "perfil.php",
@@ -131,10 +160,12 @@ function cargarPerfil(){
             $(".navPerfil").html(result);
             $.ajax({url: "",
                 success: function(result){
-                    $(".carritoP").html(result);
+                    $("").html(result);
                 }
             });
         }
     });
 }
+
+
 

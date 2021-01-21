@@ -1,45 +1,36 @@
 <?php 
-include('login1.php') 
+require 'conexion.php'; 
+if (!isset($_GET['code'])) {
+	exit("can't find the page"); 
+}
+
+$code = $_GET['code']; 
+$getCodequery = mysqli_query($bd, "SELECT * FROM resetPasswords WHERE code = '$code'"); 
+if (mysqli_num_rows($getCodequery) == 0) {
+	exit("No puedo encontrar la página porque no es el mismo código"); 
+}
+
+
+if (isset($_POST['password'])) {
+	$pw = $_POST['password']; 
+	$pw = md5($pw); 
+	$row = mysqli_fetch_array($getCodequery); 
+	$email = $row['email']; 
+	$query = mysqli_query($bd, "UPDATE usuario SET contrasena = '$pw' WHERE email = '$email'");
+
+	if ($query) {
+	 	$query = mysqli_query($bd, "DELETE FROM resetPasswords WHERE code ='$code'"); 
+	 	exit('Contraseña actualiza'); 	
+ 	 }else {
+ 	 	exit('Algo salió mal :('); 	
+ 	 } 	 
+}
 
 ?>
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Sign Up</title>
 
-  
-
-</head>
-<body>
-<center><div>
-          <div>
-              <div>
-                <div>
-                    <h5>
-                        <strong>Nueva contraseña</strong>
-                    </h5>
-                    <div>
-                        <form action="resetpassword.php" method="POST">
-                        
-                            <div>
-                                <div>
-                            <div>
-                                <input type="password" name="password" id="password" placeholder="Nueva contraseña">
-                            </div>
-                            <button type="submit" name="submit">Regístrate</button>                           
-                            <hr>
-                            <em>¿Ya tienes cuenta? <a href="login_vista.php">Inicia Sesión</a></em>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div></center>
-
-</body>
-</html>
-
+<form method="post">
+	<input type="password" name="password" placeholder="Nueva contraseña">
+	<br>
+	<input type="submit" name="submit" value="Actualizar contraseña">
+</form>

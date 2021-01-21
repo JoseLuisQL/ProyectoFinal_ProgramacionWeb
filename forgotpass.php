@@ -1,100 +1,79 @@
-
 <?php
-error_reporting(0);
 
-$errors ='';
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
 
-if($_POST['submit']=='Send')
-{
-    //keep it inside
-    $email=$_POST['email'];
-    $password = $_GET['passsword'];
-    $con=mysqli_connect("localhost","root","","register_login");
-    // Check connection
-    if (mysqli_connect_errno())
-    {
-      echo "Failed to connect to MySQL: " . mysqli_connect_error();
+require 'PHPMailer/src/Exception.php';
+require 'PHPMailer/src/PHPMailer.php';
+require 'PHPMailer/src/SMTP.php';
+require 'conexion.php';
+
+if (isset($_POST['email'])) {
+
+    $emailTo = $_POST['email']; 
+    $mail = new PHPMailer(true);                             
+    $code = uniqid(true); 
+    $query = mysqli_query($bd,"INSERT INTO resetpasswords (code, email) VALUES('$code','$emailTo')"); 
+    if (!$query) {
+       exit('Error'); 
     }
-    $query = mysqli_query($con,"SELECT * FROM user_login WHERE email='$email'")
-    or die(mysqli_error($con));
-    
-    require 'phpmailer/PHPMailerAutoload.php';
-    $mail = new PHPMailer;
-    //smtp settings
-    $mail->isSMTP(); // send as HTML
-    $mail->Host = "smtp.gmail.com"; // SMTP servers
-    $mail->SMTPAuth = true; // turn on SMTP authentication
-    $mail->Username = "cosmo.store4@gmail.com"; // Your mail
-    $mail->Password = 'cosmostore789'; // Your password mail
-    $mail->Port = 587; //specify SMTP Port
-    $mail->SMTPSecure = 'tls';                               
-    $mail->setFrom($_POST['email'],$_POST['name']);
-    $mail->addAddress($email); // Your mail
-    $mail->addReplyTo($_POST['email'],$_POST['name']);
-    $mail->isHTML(true);
-    $mail->Subject='Form Submission:' .$_POST['subject'];
-    $code= rand(100,999);
-    mail($email, "Send Code", $message);
-    $mail->Body= $message="LINK DE REACTIVACION DE CONTRASEÑA:http://localhost/web/ForgotPassword/resetpassword.php?email=code=$code";
+    try {
+        
+        $mail->SMTPDebug = 0;    
+        $mail->isSMTP();                                     
+        $mail->Host = 'smtp.gmail.com';  
+        $mail->SMTPAuth = true;                              
+        $mail->Username = "cosmo.store4@gmail.com";                
+        $mail->Password = 'cosmostore789';                          
+        // $mail->SMTPSecure = 'tls';                           
+        $mail->SMTPSecure = 'ssl';                            
+        // $mail->Port = 587;                              
+        $mail->Port = 465;
 
-    if (mysqli_num_rows ($query)==1)
-    {
-        if($mail->send())
-        {
-           
-        }
-        $query2 = mysqli_query($con, "UPDATE password SET passsword='$password' WHERE email='$email'")
-        or die(mysqli_error($con)); 
-        }
-        else
-        {
-       $errors = '<center><div role="alert">Lo sentimos, su correo electrónico no existen en nuestra base de datos de registros</div></center><br>';
+        
+        $mail->setFrom('email@gmail.com', 'Cosmo Games'); 
+        $mail->addAddress($emailTo, '');    
+
+        $mail->addReplyTo('no-replay@example.com', 'No Replay');
+        
+        $url = "http://" . $_SERVER['HTTP_HOST'] . dirname($_SERVER['PHP_SELF']). "/resetPassword.php?code=$code"; 
+        $mail->isHTML(true);                                 
+        $mail->Subject = 'Su enlace de restablecimiento de contraseña';
+        $mail->Body    = "<h1> Solicitaste restablecer la contraseña </h1>
+              Haga clic <a href='$url'>en este enlace</a> para cambiar tu contraseña.";
+        $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
+
+        
+        $mail->SMTPOptions = array(
+            'ssl' => array(
+            'verify_peer' => false,
+            'verify_peer_name' => false,
+            'allow_self_signed' => true
+            )
+        );
+
+
+        $mail->send();
+        echo 'El mensaje ha sido enviado';
+    } catch (Exception $e) {
+        echo 'No se pudo enviar el mensaje. Error de envío:', $mail->ErrorInfo;
     }
+
+    exit(); 
 }
 
 ?>
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Recuperar Contraseña</title>
-
-
-</head>
-<body>
- 
-    <div>
-    <h5>
-    <center><strong>Recuperar Contraseña</strong></center><br>
-            </div>
+<form method="post">
+<h5>
+    <center><strong>Recuperar Contraseña</strong></center>
+            
     </h5>
-    
-        <div>
-       
-        <form action="forgotpass.php" method="POST">
-            
-                <div>
-                <?= $errors?>
-                <center><input type="email"name="email" id="email"  placeholder="E-mail"></center><br>
-            </div>
-                </div>
-                
-                <center><button type="submit" name="submit" value="Send">Enviar código al correo</button></center><br>
-            </div>
-                
-                <center><a href="form/login_vista.php">Sing in</a><center>
-                       
-                        
-            </form>
-                   
-        </div>
-    </div>
-            
-</body>
-</html>
+<center><input type="email" name="email" placeholder="Email" autocomplete="off">
+    <br><br>
+    <input type="submit" name="submit" value="Enviar código al correo"></center>
+</form>
+
 
 
 
