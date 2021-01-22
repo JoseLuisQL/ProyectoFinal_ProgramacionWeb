@@ -130,6 +130,46 @@ function home(){
             $(".contenido").html(result);
             $('.slider').slider();
 
+            $.ajax({
+                url: "infoInicio.php?nsw&init",
+                success: function(result){
+                    $("#nswIndex").html(result);
+                }
+            });
+            $.ajax({
+                url: "infoInicio.php?vendidos",
+                success: function(result){
+                    $("#vendidoIndex").html(result);
+                }
+            });
+            $.ajax({
+                url: "infoInicio.php?nuevos",
+                success: function(result){
+                    $("#salidaIndex").html(result);
+                }
+            });
+            $.ajax({url: "infoInicio.php?ps4&init", success: function(result){
+                $("#psIndex").html(result);
+            }});
+            $.ajax({url: "infoInicio.php?xone&init", success: function(result){
+                $("#xboxIndex").html(result);
+            }});
+            $.ajax({url: "infoInicio.php?pc&init", success: function(result){
+                $("#pcIndex").html(result);
+            }});
+        }
+    });
+}
+
+function vistaPtl(plataforma, filtro=4,pagina=1){
+    $.ajax({url: "infoInicio.php?" + plataforma + "&filtro=" + filtro + "&pagina=" + pagina,
+        success: function(result){
+            $(".contenido").html(result);
+            if(plataforma == 'todo'){
+                breadcrumControl(true,'videojuegos');
+            }else{
+                breadcrumControl(true,plataforma);
+            }
         }
     });
 }
@@ -149,6 +189,44 @@ function breadcrumControl(limpiar = null,plataforma = null, nombre = null){
     }
     
 
+}
+
+
+
+
+function breadcrumControl(limpiar = null,plataforma = null, nombre = null){ 
+  
+    if(limpiar != null) {
+        $(".juegoMigas").remove();
+        $(".migasInfoJuego").remove();
+        console.log("borro breadcrum");
+    }
+    if(plataforma != null){
+        $(".migasDePan").append("<a class='breadcrumb juegoMigas'>" + plataforma.toUpperCase() + "</a>");
+        console.log("añado plataforma");
+    }
+    if(nombre != null){
+        $(".migasDePan").append('<a class="breadcrumb migasInfoJuego">' + nombre + '</a>');
+        console.log("añado nombre");
+    }
+
+}
+
+
+function infoVersion(idJ, nombre, plataforma, reset=null){ //Carga la información de el producto y lo añade en el contenedor
+    breadcrumControl(reset, null, nombre);
+    $.get("infoProducto.php", {
+        id: idJ,
+        ptl: plataforma
+    },function(data){
+        $(".contenido").html(data);
+    });
+}
+function paginaPrincipal(){
+    $.ajax({url: "principal.php",
+    success: function(result){
+        $(".contenido").html(result);
+    }});
 }
 
 
