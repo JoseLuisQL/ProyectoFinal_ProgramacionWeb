@@ -8,50 +8,41 @@
 <body >
     
 <div>                
-        
-            <div><center><h1>Regístrate</h1></center></div><br>
-            
-            
-            <div>
-                <label></label>
-                <center><input type="text" style="border-radius: 5px;" placeholder="Nombre Usuario" name="usr" id="usuarioLogin" ></center><br>
-                
-            </div>
-            <div>
-                <label></label>
-                <center><input type="text" style="border-radius: 5px;" placeholder="Nombre" name="nombre" id="nombre" ></center><br>
-                
-            </div>
-            <div>
-                <label></label>
-                <center><input type="text" style="border-radius: 5px;" placeholder="Apellido" name="apellido" id="apellido"></center><br>
-                
-            </div>
-            <div>
-                <label></label>
-                <center><input type="email" style="border-radius: 5px;" placeholder="Email" id="email" name="email"><center><br>
-                
-            </div>
-            <div>
-                <center><input type="tel" style="border-radius: 5px;" name="telefono" id="telefono" placeholder="Número Telefónico"><center><br>
-            </div>
+  <div class="container">
+    <h1>Regístrate</h1>
+    <p>Complete este formulario para crear una cuenta.</p>
+    <hr>
 
-            <div>
-                <center><input type="password" style="border-radius: 5px;" name="pass" id="passwordLogin"  placeholder="Contraseña"><center><br>
-            </div>
+    <label for="text"><b>Nombre Usuario</b></label>
+    <input type="text" style="border-radius: 5px;" placeholder="Nombre Usuario" name="usr" id="usuarioLogin" required>
 
-            
-            <center><button onclick="comprobarDatosRegistro()" class="col s12 btn btn-large waves-effect teal darken-1">Registrarse<label></label></button></center><br>
-            
-            <center><em>¿Ya tienes cuenta? <a onclick="iniciarSesion()">Iniciar Sesión</a></em></center><br><br>
+    <label for="text"><b>Nombre</b></label>
+    <input type="text" style="border-radius: 5px;" placeholder="Nombre" name="nombre" id="nombre" required>
 
+    <label for="text"><b>Apellido</b></label>
+    <input type="text" style="border-radius: 5px;" placeholder="Apellido" name="apellido" id="apellido" required>
+
+    <label for="tel"><b>Teléfono</b></label>
+    <input type="tel" style="border-radius: 5px;" name="telefono" id="telefono" placeholder="Número Telefónico" required>
+    
+
+    <label for="email"><b>Email</b></label>
+    <input type="email" style="border-radius: 5px;" placeholder="Email" id="email" name="email" required>
+
+    <label for="psw"><b>Password</b></label>
+    <input type="password" style="border-radius: 5px;" name="pass" id="passwordLogin"  placeholder="Contraseña" required>
+
+    <center><button onclick="comprobarDatosRegistro()" class="col s12 btn btn-large waves-effect teal darken-1">Registrarse<label></label></button></center><br>
+            
+            <center><em>¿Ya tienes cuenta? <a onclick="iniciarSesion()">Iniciar Sesión</a></em></center><br>
             <center><a class="btn teal darken-1" onclick="iniciarSesion()">Volver</a>
             <a class="btn teal darken-1" onclick="home()">Inicio</a></center>
                
 
             <div class="section"></div>
-    <div class="section"></div>
+  </div>
+
     
-    </div>    
+</div>    
 </body>
 </html>

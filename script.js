@@ -192,8 +192,6 @@ function breadcrumControl(limpiar = null,plataforma = null, nombre = null){
 }
 
 
-
-
 function breadcrumControl(limpiar = null,plataforma = null, nombre = null){ 
   
     if(limpiar != null) {
@@ -213,7 +211,7 @@ function breadcrumControl(limpiar = null,plataforma = null, nombre = null){
 }
 
 
-function infoVersion(idJ, nombre, plataforma, reset=null){ //Carga la información de el producto y lo añade en el contenedor
+function infoVersion(idJ, nombre, plataforma, reset=null){ 
     breadcrumControl(reset, null, nombre);
     $.get("infoProducto.php", {
         id: idJ,
@@ -229,7 +227,16 @@ function paginaPrincipal(){
     }});
 }
 
-
+function añadirCarrito(idP, precio, nombre){ 
+    $.get("cliente/carrito.php",{
+        idA: idP,
+        precio : precio,
+        nombre: nombre
+    },function(data){
+        Materialize.toast('¡Añadido al carrito!', 3000, 'green rounded');
+        $(".carritoP").html(data);
+    }
+)};
 
 function cargarPerfil(){
     $.ajax({
@@ -245,5 +252,212 @@ function cargarPerfil(){
     });
 }
 
+function cargarCesta(){
+    $.ajax({
+        url: "cliente/cesta.php",
+        method: "POST",
+        success: function(result){
+            if(result == 1){
+                Materialize.toast('¡Aun no añadiste nada a tu cesta!', 3000, 'orange rounded');
+            }else{
+                $(".contenido").html(result);
+            }
+        }
+    });
+}
 
 
+
+function pagarCesta(){
+    var tajeta = false;
+    $.ajax({
+        url: "cliente/pago.php",
+        method: "POST",
+        success: function(result){
+            $(".contenido").html(result);
+            Materialize.updateTextFields(); 
+            $('.collapsible').collapsible({
+                accordion: false, 
+                onOpen: function(el) { }, 
+                onClose: function(el) {  } 
+            });
+            $.ajax({ 
+                url: "cliente/cesta.php?pago",
+                method: "POST",
+                success: function(resumen){
+                    $(".resumenPago").html(resumen);
+                }
+            });
+        }
+    });
+}
+
+
+
+
+
+function eliminarUno(id){
+    $.get("cliente/carrito.php?idE",{
+        idE: id,
+    },function(data){
+        Materialize.toast('Eliminado!', 3000, 'red rounded');
+        $(".contenido").html(data);
+        cargarPerfil();
+    });
+}
+
+
+function terminarPago(){
+    var nombre = $('#nombre').val();
+    var apellidos = $('#apellidos').val();
+    var dni = $('#dni').val();
+    var calle = $('#direccion').val();
+    var numeroCalle = $('#numero').val();
+    var ciudad = $('#ciudad').val();
+    var provincia = $('#provincia').val();
+    var cp = $('#cp').val();
+    var telefono = $('#telefono').val();
+    var metodoCorreo = "correos";
+        var metodoPagoTarjeta = false;
+        var datosPago = [null,null,null,null,null];
+   
+    $.ajax({
+        method: "POST",
+        url: "cliente/terminarPago.php",
+        data: {
+            nombre : nombre,
+            apellidos: apellidos,
+            dni : dni,
+            calle : calle,
+            numeroCalle : numeroCalle,
+            ciudad : ciudad,
+            provincia : provincia,
+            cp : cp,
+            telefono : telefono,
+            metodoCorreo : metodoCorreo,
+            metodoPagoTarjeta : metodoPagoTarjeta,
+            datosPago : datosPago
+        },
+        success: function(result){
+            result = JSON.parse(result);
+            if(result["estado"]){
+                var idL = result["idLocalizable"]
+                
+                Materialize.toast(result["msg"], 3000, 'green rounded');
+                $.ajax({
+                    type: "GET",
+                    url: "cliente/resumenPedido.php",
+                    data: {
+                        id: idL
+                    },
+                    success: function( data ) {
+                        $(".contenido").html(data);
+                        $('.collapsible').collapsible({
+                            accordion: false, 
+                            onOpen: function(el) { }, 
+                            onClose: function(el) {  } 
+                        });
+                    }
+                })
+            }else{
+                Materialize.toast(result["msg"], 3000, 'red rounded');
+            }
+        }
+    });
+  
+}
+
+
+
+function tranferencia(){
+    $(".tranferencia").show();
+    $(".pagoTarjeta").hide();
+    tarjeta = false;
+}
+
+function pedidosPendiente(){
+    $.ajax({
+        url: 'cliente/listaPedidos.php?pendiente',
+        method: 'POST',
+        data: {
+
+        },
+        success: function(data){
+            $(".contenido").html(data);
+            breadcrumControl(true,"pedientes");
+        }
+    })
+}
+
+
+
+function verPedido(id){
+    $.ajax({
+        type: "GET",
+        url: "cliente/resumenPedido.php",
+        data: {
+            id: id
+        },
+        success: function( data ) {
+            $(".contenido").html(data);
+            $('.collapsible').collapsible({
+                accordion: false, 
+                onOpen: function(el) { }, 
+                onClose: function(el) {  }
+            });
+            breadcrumControl(true,"Resumen Pedido");
+        }
+    })
+}
+
+
+function todosPedidos(){
+    $.ajax({
+        url: 'cliente/listaPedidos.php',
+        method: 'POST',
+        data: {
+
+        },
+        success: function(data){
+            $(".contenido").html(data);
+            breadcrumControl(true,"Historial de pedidos");
+        }
+    })
+}
+
+
+function ayudar(){
+    $.ajax({
+        type: "GET",
+        url: "cliente/soporteTecnico.php",
+        success: function( data ) {
+            $(".contenido").html(data);
+            breadcrumControl(true,"Soporte Técnico");
+            $(document).ready(function(){
+                $('ul.tabs').tabs();
+            });
+            $('#mensaje').val('Cual es tu consulta: ');
+            $('#mensaje').trigger('autoresize');
+            Materialize.updateTextFields();
+        }
+    })
+}
+
+
+
+function enviarMensaje(){
+    $.ajax({
+        type: "GET",
+        url: "cliente/soporteTecnico.php?guardar",
+        method: "POST",
+        data: {
+            nombre: $('#nombre').val(),
+            correo: $('#email').val(),
+            mensaje: $('#mensaje').val()
+        },
+        success: function( data ) {
+            Materialize.toast("¡En breve te ayudaremos!", 3000, 'green rounded');
+            home();
+        }
+    })
+}

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<meta charset="utf-8">
+	    <meta charset="utf-8">
 		<link rel="icon" type="image/png" href="assets/img/favicon.png">
 		<link rel="stylesheet" type="text/css" href="index.css">
 		<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -13,7 +13,6 @@
       	<script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 		<script type="text/javascript" src="js/materialize.min.js"></script>
 		<script src="http://malsup.github.com/jquery.form.js"></script>
-
 		<script src="script.js"></script>
 		<style>
 			body{
@@ -42,6 +41,7 @@
 				<div class="nav-wrapper teal darken-1">
 					<a href="" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
 					<a onclick="home();" class="brand-logo">CosmoGames</a>
+					
 					<a></a>
 					<ul id="nav-mobile" class="right hide-on-med-and-down">
 						<li>
@@ -56,11 +56,11 @@
 								</div>
 							</div>
 						</li>
-						<li><a onclick="">Todos</a></li>
-						<li><a onclick="">NSW</a></li>
-				        <li><a onclick="">PS</a></li>
-						<li><a onclick="">XBOX</a></li>
-						<li><a onclick="">PC</a></li>
+						<li><a onclick="vistaPtl('todo',16)">Todos</a></li>
+						<li><a onclick="vistaPtl('nsw',8)">NSW</a></li>
+				        <li><a onclick="vistaPtl('ps4',8)">PS</a></li>
+						<li><a onclick="vistaPtl('xone',8)">XBOX</a></li>
+						<li><a onclick="vistaPtl('pc',8)">PC</a></li>
 						<li><a class="dropdown-button" href="" data-activates="dropdown1">Otros<i class="material-icons right">arrow_drop_down</i></a></li>
 						<li><a href="" data-activates="slide-out" class="perfil-navbar"><i class="material-icons">person_pin</i></a></li>
 					</ul>
@@ -69,22 +69,37 @@
 			</nav>
 		</div>
 		<ul class="side-nav" id="mobile-demo">
-			<li><a onclick="">Todos</a></li>
-			<li><a onclick="">NSW</a></li>
-			<li><a onclick="">PS</a></li>
-			<li><a onclick="">XBOX</a></li>
-			<li><a onclick="">PC</a></li>
+			<li><a onclick="vistaPtl('todo',16)">Todos</a></li>
+			<li><a onclick="vistaPtl('nsw',8)">NSW</a></li>
+			<li><a onclick="vistaPtl('ps4',8)">PS</a></li>
+			<li><a onclick="vistaPtl('xone',8)">XBOX</a></li>
+			<li><a onclick="vistaPtl('pc',8)">PC</a></li>
 			<li><a onclick="">3DS</a></li>
 			<li class="divider"></li>
 			<li><a href="">Tarjetas de Regalo</a></li>
 			<li><a href="">Licencias de Software</a></li>
+			<li><a href="" data-activates="slide-out" class="perfil-navbar"><i class="material-icons">person_pin</i></a></li>
+			
 		</ul>
+
+		<div class="row">
+			<div class="container" style="padding-top: 20px">
+				<nav>
+					<div class="nav-wrapper teal lighten-1">
+						<div class="col s12 migasDePan">
+							<a onclick="home()" class="letra-mediana">Inicio</a>
+						</div>
+					</div>
+				</nav>
+			</div>
+		</div>
 		
 		<div class="container">
 			<div class="contenido" style="background-color: #f7f7f7">
 			</div>
 		</div>
 
+		
 
 		
 	</body>

@@ -31,16 +31,15 @@
 		if($_SESSION["rol"] == "admin"){?>
 			<li><a class="letra-negrita" href="admin" ><i class="material-icons">brightness_low</i>Administrar Web</a></li>
 		<?php } else  { ?>
-			<li><a class="letra-negrita" onclick=""><i class="material-icons">loyalty</i>Pedidos pendientes</a></li>
-			<li><a class="letra-negrita" onclick=""><i class="material-icons">history</i>Historial de pedidos</a></li>
-			<li><a class="letra-negrita" onclick=""><i class="material-icons">message</i>Soporte técnico</a></li>
+			<li><a class="letra-negrita" onclick="pedidosPendiente()"><i class="material-icons">loyalty</i>Pedidos pendientes</a></li>
+			<li><a class="letra-negrita" onclick="todosPedidos()"><i class="material-icons">history</i>Historial de pedidos</a></li>
+			<li><a class="letra-negrita" onclick="ayudar()"><i class="material-icons">message</i>Soporte técnico</a></li>
 		<?php }
 	?>
 	<li><div class="divider"></div></li>
 		<div class="carritoP">
 		</div>
 	<li><div class="divider"></div></li>
-	<li><a class="btn" onclick="">Ir a la cesta</a></li>
+	<li><a class="btn" onclick="cargarCesta()">Ir a la cesta</a></li>
 	<li><a class="btn" onclick="cerrarSesion()">Cerrar Sesión</a></li>
 <?php } ?>
-

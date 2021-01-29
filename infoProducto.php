@@ -33,6 +33,6 @@
         <p class="col s12 letra-roboco"><?=$dato["descripJuego"]?></p>
     </div>
     <div class="center-align">
-        <iframe width="80%" height="500" src="https://youtu.be/MDYJv8wItnQ" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+        <iframe width="80%" height="500" src="img/lol.gif" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
     </div>
 </div>

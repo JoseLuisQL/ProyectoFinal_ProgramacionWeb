@@ -1,0 +1,11 @@
+Options +FollowSymLinks
+RewriteEngine on
+
+# Index
+RewriteRule ^principal$ index.php
+
+# Login - Registrarse
+
+# Admin
+RewriteRule ^admin$ administrador/admin.php
+
