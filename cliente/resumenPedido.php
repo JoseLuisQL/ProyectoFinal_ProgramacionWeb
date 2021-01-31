@@ -45,7 +45,7 @@ $rowDatosPedido = mysqli_fetch_assoc($datosPedido);
                 <div class="collapsible-body">
                     <?=$rowDatosPedido["nombre"]?> <?=$rowDatosPedido["apellidos"]?> <br>
                     DNI: <?=$rowDatosPedido["dni"]?> <br>
-                    C/<?=$rowDatosPedido["calle"]?> <?=$rowDatosPedido["numeroCalle"]?> <br>
+                    DIRECCION: <?=$rowDatosPedido["calle"]?> <?=$rowDatosPedido["numeroCalle"]?> <br>
                     <?=$rowDatosPedido["ciudad"]?>, <?=$rowDatosPedido["provincia"]?><br>
                     CP: <?=$rowDatosPedido["codigoPostal"]?><br>
                     <?=$rowDatosPedido["telefono"]?>
@@ -107,8 +107,7 @@ $rowDatosPedido = mysqli_fetch_assoc($datosPedido);
                     }
                 ?>
             </table>
-            <div style="text-align: right;margin-right: 196px;margin-top: 20px;font-size:24px; color: darkblue">Precio total: <?=$precio?></div>
+            <div style="text-align: right;margin-right: 196px;margin-top: 20px;font-size:24px; color: darkblue">Precio total: S/. <?=$precio?></div>
         </div>
     </div>
 </div>
-

@@ -20,12 +20,12 @@
             <label>EDICIÓN:</label>
             <div class="center-align"><?=$dato["nombreEdicion"]?></div>
             <br>
-            <label>Lanzamiento:</label>
+            <label>LANZAMIENTO:</label>
             <div class="center-align"><?=$dato["fechaSalida"]?></div>
         </div>
         <div class="col offset-s4">
             <h5 class="pink-text" style="text-decoration: underline">PRECIO</h5>
-            <h2 class="pink-text"><?=$dato["precio"]?> $</h2>
+            <h2 class="pink-text">S/. <?=$dato["precio"]?></h2>
         </div>
     </div>
     <div class="row">

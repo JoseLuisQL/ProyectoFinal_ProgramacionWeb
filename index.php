@@ -58,9 +58,9 @@
 						</li>
 						<li><a onclick="vistaPtl('todo',16)">Todos</a></li>
 						<li><a onclick="vistaPtl('nsw',8)">NSW</a></li>
-				        <li><a onclick="vistaPtl('ps4',8)">PS</a></li>
-						<li><a onclick="vistaPtl('xone',8)">XBOX</a></li>
-						<li><a onclick="vistaPtl('pc',8)">PC</a></li>
+				        <li><a onclick="vistaPtl('PS4',8)">PS</a></li>
+						<li><a onclick="vistaPtl('XBOX',8)">XBOX</a></li>
+						<li><a onclick="vistaPtl('PC',8)">PC</a></li>
 						<li><a class="dropdown-button" href="" data-activates="dropdown1">Otros<i class="material-icons right">arrow_drop_down</i></a></li>
 						<li><a href="" data-activates="slide-out" class="perfil-navbar"><i class="material-icons">person_pin</i></a></li>
 					</ul>
@@ -71,9 +71,9 @@
 		<ul class="side-nav" id="mobile-demo">
 			<li><a onclick="vistaPtl('todo',16)">Todos</a></li>
 			<li><a onclick="vistaPtl('nsw',8)">NSW</a></li>
-			<li><a onclick="vistaPtl('ps4',8)">PS</a></li>
-			<li><a onclick="vistaPtl('xone',8)">XBOX</a></li>
-			<li><a onclick="vistaPtl('pc',8)">PC</a></li>
+			<li><a onclick="vistaPtl('PS4',8)">PS</a></li>
+			<li><a onclick="vistaPtl('XBOX',8)">XBOX</a></li>
+			<li><a onclick="vistaPtl('PC',8)">PC</a></li>
 			<li><a onclick="">3DS</a></li>
 			<li class="divider"></li>
 			<li><a href="">Tarjetas de Regalo</a></li>
@@ -100,7 +100,21 @@
 		</div>
 
 		
-
-		
+		<footer class="page-footer teal darken-1">
+          <div class="container">
+            <div class="row">
+              <div class="col l6 s12">
+                <h5 class="white-text">Infornación</h5>
+				   <p>Sobre nosotros: <a onclick="nosotros()">Aquí</a></p>
+				   <p>Contacto: <a onclick="ayudar()">Aquí</a></p>
+              </div>
+            </div>
+          </div>
+          <div class="footer-copyright">
+		    <div class="container">
+			  <center><li>©2021 Gosmo Games</li></center>
+			</div>
+          </div>
+        </footer>
 	</body>
 </html>

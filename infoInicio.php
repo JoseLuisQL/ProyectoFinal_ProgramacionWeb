@@ -3,7 +3,6 @@
 require 'productos.php';
 
 $reg = null;
-
 $total = 1; 
 $total_paginas = 1; 
 
@@ -34,45 +33,10 @@ if(isset($_GET["nsw"])){
         $total_paginas = $datos[2]; 
     }
 }
-if(isset($_GET["ps4"])){
+if(isset($_GET["PS4"])){
     $pagina = $_GET["pagina"] ?? 1;
-    $nombrePlt = 'ps4';
-	$filtro = '2';
-	$limit = $_GET["filtro"] ?? 4;
-	$objP = new Producto;
-	if(isset($_GET["init"])){
-        $reg = $objP->filtroInicio($filtro, $limit, $nombrePlt);
-    }else{
-        $datos = $objP->obtenerProductos($filtro, $limit, $nombrePlt,$pagina);
-
-        $reg = $datos[0]; 
-        $total = $datos[1]; 
-        $total_paginas = $datos[2];
-    }
-
-}
-if(isset($_GET["xone"])){
-    $pagina = $_GET["pagina"] ?? 1;
-    $nombrePlt = 'xone';
-	$filtro = '7';
-	$limit = $_GET["filtro"] ?? 4;
-	$objP = new Producto;
-	if(isset($_GET["init"])){
-        $reg = $objP->filtroInicio($filtro, $limit, $nombrePlt);
-    }else{
-        $datos = $objP->obtenerProductos($filtro, $limit, $nombrePlt,$pagina);
-
-        $reg = $datos[0]; 
-        $total = $datos[1]; 
-        $total_paginas = $datos[2]; 
-    }
-
-}
-
-if(isset($_GET["pc"])){
-    $pagina = $_GET["pagina"] ?? 1;
-    $nombrePlt = 'pc';
-	$filtro = '4';
+    $nombrePlt = 'PS4';
+	$filtro = '12';
 	$limit = $_GET["filtro"] ?? 4;
 	$objP = new Producto;
 	if(isset($_GET["init"])){
@@ -84,12 +48,46 @@ if(isset($_GET["pc"])){
         $total = $datos[1]; 
         $total_paginas = $datos[2]; 
     }
+
+}
+
+if(isset($_GET["XBOX"])){
+    $pagina = $_GET["pagina"] ?? 1;
+    $nombrePlt = 'XBOX ONE';
+	$filtro = '26';
+	$limit = $_GET["filtro"] ?? 4;
+	$objP = new Producto;
+	if(isset($_GET["init"])){
+        $reg = $objP->filtroInicio($filtro, $limit, $nombrePlt);
+    }else{
+        $datos = $objP->obtenerProductos($filtro, $limit, $nombrePlt,$pagina);
+
+        $reg = $datos[0];
+        $total = $datos[1]; 
+        $total_paginas = $datos[2]; 
+    }
+
+}
+
+if(isset($_GET["PC"])){
+    $pagina = $_GET["pagina"] ?? 1;
+    $nombrePlt = 'PC';
+	$filtro = '11';
+	$limit = $_GET["filtro"] ?? 4;
+	$objP = new Producto;
+	if(isset($_GET["init"])){
+        $reg = $objP->filtroInicio($filtro, $limit, $nombrePlt);
+    }else{
+        $datos = $objP->obtenerProductos($filtro, $limit, $nombrePlt,$pagina);
+        $reg = $datos[0]; 
+        $total = $datos[1]; 
+        $total_paginas = $datos[2]; 
+    }
 }
 if(isset($_GET["n3ds"])){
-    
 }
 if(isset($_GET["reserva"])){
-    
+  
 }
 if(isset($_GET["accesorios"])){
     
@@ -115,6 +113,14 @@ if(isset($_GET["buscar"])){
 
 if($reg == NULL || $reg->num_rows == 0){
     ?>
+    <div class="container">
+        <div class="row">
+            <div class="col s12 m12">
+                <center><h3></h3></center>
+                <img src="" width="100%" height="100%"/>
+            </div>
+        </div>
+    </div>
     <?php
 }else{
 
@@ -128,7 +134,7 @@ if($reg == NULL || $reg->num_rows == 0){
     <div class="col l12">
     <?php while($row = mysqli_fetch_assoc($reg)){
         if($row["img"] == NULL){
-            $img = "00.png";
+            
         }else{
             $img = $row["img"];
         }
@@ -145,7 +151,7 @@ if($reg == NULL || $reg->num_rows == 0){
                     <?php if($row["stock"]<=0){?>
                         <span class="pink-text" style="font-size:24px">¡Agotado!</span>
                     <?php }else{ ?>
-                    <span class="pink-text" style="font-size:24px"><?=$row["precio"]?> $</span>
+                    <span class="pink-text" style="font-size:24px">S/. <?=$row["precio"]?></span>
                     <a onclick="añadirCarrito(this.id, <?=$row["precio"]?>, '<?=$row['nombreJuego']?>')" id="<?=$row['idVersion']?>" class="btn-floating halfway-fab waves-effect waves-light green"><i class="material-icons">shopping_cart</i></a>
                     <?php } ?>
                 </div>
@@ -156,44 +162,5 @@ if($reg == NULL || $reg->num_rows == 0){
     ?>
     </div>
 </div>
-   
-    <?php
-
-        if($total_paginas != 1){
-
-    ?>
-    <div class="center" style="padding: 15px">
-        <ul class="pagination">
-                <?php if($pagina == 1){ ?>
-                    <li class="disabled"><a><i class="material-icons">chevron_left</i></a></li>
-                <?php } else { ?>
-                    <li class="waves-effect"><a onclick="vistaPtl('<?=$nombrePlt?>','<?=$limit?>','<?=$pagina-1?>')"><i class="material-icons">chevron_left</i></a></li>
-                <?php }
-                ?>
-            <?php
-                $i = 1;
-                while($i<=$total_paginas){
-                    if($i == $pagina){
-                        ?>
-                        <li class="active"><a><?=$i?></a></li>
-                        <?php
-                    }else{
-                    ?>
-
-                    <li class="waves-effect"><a onclick="vistaPtl('<?=$nombrePlt?>','<?=$limit?>','<?=$i?>')"><?=$i?></a></li>
-                    <?php
-                    }
-                    $i++;
-                }
-            ?>
-            <?php if($pagina == $total_paginas){ ?>
-                    <li class="disabled"><a><i class="material-icons">chevron_right</i></a></li>
-                <?php } else { ?>
-                    <li class="waves-effect"><a onclick="vistaPtl('<?=$nombrePlt?>','<?=$limit?>','<?=$pagina+1?>')"><i class="material-icons">chevron_right</i></a></li>
-                <?php }
-            ?>
-
-        </ul>
-    <?php } ?>
     
-</div>
+   

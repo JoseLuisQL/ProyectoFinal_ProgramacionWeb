@@ -57,8 +57,8 @@
 					<td><?=$edicion?></td>
 					<td><?=$plataforma?></td>
 					<td><?=$cantidad?></td>
-					<td><?=$precio?> $/u</td>
-					<td><?=$precioTotalArticulos?> $</td>
+					<td>S/. <?=$precio?> x U</td>
+					<td>S/. <?=$precioTotalArticulos?> </td>
 					<td><a class="btn btn-danger" onclick="eliminarUno(<?=$idP?>)"><i class="material-icons">delete</i></a></td>
 				</tr>
 				<?php $i++;
@@ -66,7 +66,7 @@
 			} ?>
 			</table>
 			<div class="container">
-				<h4 style="color:red; text-align:right">Total: <?=$totalPrecio?> $</h4>
+				<h4 style="color:red; text-align:right">Total: S/. <?=$totalPrecio?></h4>
 			</div>
 			<div class="row">
 				<div class="col offset-m10">
@@ -93,7 +93,7 @@
 				<?php $i++;
 				$totalPrecio = $totalPrecio+$precioTotalArticulos;
 			} ?>
-			<div style="color:red">Total: <?=$totalPrecio?> $</div>
+			<div style="color:red">Total: S/. <?=$totalPrecio?> </div>
 		<?php }
 	}else{
 		echo true;

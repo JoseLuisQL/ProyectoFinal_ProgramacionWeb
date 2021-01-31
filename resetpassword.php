@@ -20,17 +20,17 @@ if (isset($_POST['password'])) {
 
 	if ($query) {
 	 	$query = mysqli_query($bd, "DELETE FROM resetPasswords WHERE code ='$code'"); 
-	 	exit('Contraseña actualiza'); 	
+	 	exit('<center><h1>Contraseña actualiza</h1></center><br> <center><a href="index.php">INICIAR</a></center>'); 	
  	 }else {
- 	 	exit('Algo salió mal :('); 	
+ 	 	exit('<center><h1>Algo salió mal :(</h1></center>'); 	
  	 } 	 
 }
 
 ?>
 
 
-<form method="post">
-	<input type="password" name="password" placeholder="Nueva contraseña">
+<center><form method="post">
+	<input type="password" name="password" placeholder="Nueva contraseña"><br>
 	<br>
 	<input type="submit" name="submit" value="Actualizar contraseña">
-</form>
+</form><center>

@@ -1,4 +1,4 @@
-<h1>Pagar</h1>
+<h1>FACTURACIÓN Y ENVÍO</h1>
 <div class="letra-roboco row">
     <div class="container-fluid">
         <div class="col m9 s12">
@@ -30,7 +30,7 @@
                         <div class="row">
                             <div class="input-field col s12 m8">
                                 <input placeholder="Calle y número, apartado de correos" id="direccion" type="text" class="validate">
-                                <label for="direccion">Dirección Domiciliaria</label>
+                                <label for="direccion">Dirección</label>
                             </div>
                             <div class="input-field col s12 m4">
                                 <input placeholder="Apartamente,unidad,edificio,piso,numero, etc" id="numero" type="text" class="validate">
@@ -70,8 +70,8 @@
                             <div class="col m4">
                                 <select class="browser-default">
                                     <option value="1" selected>Correos - Gratis</option>
-                                    <option value="2">Serpost Currier (envios nacionales) - 8 Dolares</option>
-                                    <option value="3">DHL (envios internacionales) - 24 Dolares</option>
+                                    <option value="2">Olva (1-2 días): S/9.00</option>
+                                    <option value="3">Express (24 horas): S/15.00</option>
                                 </select>
                             </div>
                         </div>
@@ -80,21 +80,21 @@
                 <li>
                     <div class="collapsible-header letra-mediana"><i class="material-icons">credit_card</i>Método de pago</div>
                     <div class="collapsible-body">
-                        <a class="btn teal darken-1" onclick="tranferencia()">Tranferencia Bancaria</a>
-                        <a class="btn teal darken-1" onclick="">Tarjeta de Crédito/Débito</a><br>
+                        <a class="btn teal darken-1" onclick="tranferencia()">Depósito o Transferencia bancaria</a>
+                        <a class="btn teal darken-1" onclick="pagoTarjeta()">Tarjetas de débito y crédito</a><br>
                         <div class="tranferencia" style="display: none">
                             <p>Muy bien! Los pasos a seguir con una tranferencian serían:</p>
                                 <ul>
-                                    <li>Realizar una trasnferencia a esta cuenta: xxxx xxx xxx xxxxxxxx</li>
-                                    <li>Como concepto dejar tu DNI y ¡TÚ NÚMERO DE PEDIDO! el que te daremos al terminar la compra!</li>
-                                    <li>Este proceso tarda alrededor de 24 horas, te informaremos cuando lo recibamos</li>
+                                    <li>Paga a nuestra cuenta en el Banco de Crédito – BCP</li>
+                                    <li>Puedes utilizar un agente, ventanilla, internet o la app.</li>
+                                    
                                 </ul>
                         </div>
                         <div class="pagoTarjeta" style="display: none">
                             <div class="row">
                                 <div class="input-field col s12 m6">
                                     <input  id="numeroTarjeta" type="text" class="validate">
-                                    <label for="numeroTarjeta">Número de tarjeta</label>
+                                    <label for="numeroTarjeta">Número de Tarjeta</label>
                                 </div>
                                 <div class="input-field col s12 m6">
                                     <input placeholder="Mes" id="mes" type="number" class="validate">
@@ -110,7 +110,7 @@
                                 </div>
                                 <div class="input-field col s12 m6">
                                     <input  id="ccTarjeta" type="number" class="validate">
-                                    <label for="ccTarjeta">Código de Control</label>
+                                    <label for="ccTarjeta">Código de seguridad</label>
                                 </div>
                             </div>
                         </div>

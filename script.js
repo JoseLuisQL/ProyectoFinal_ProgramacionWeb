@@ -375,6 +375,12 @@ function tranferencia(){
     tarjeta = false;
 }
 
+function pagoTarjeta(){
+    $(".pagoTarjeta").show();
+    $(".tranferencia").hide();
+    tarjeta = true;
+}
+
 function pedidosPendiente(){
     $.ajax({
         url: 'cliente/listaPedidos.php?pendiente',
@@ -458,6 +464,68 @@ function enviarMensaje(){
         success: function( data ) {
             Materialize.toast("¡En breve te ayudaremos!", 3000, 'green rounded');
             home();
+        }
+    })
+}
+
+function loRecibi(localizador){
+    $.ajax({
+        type: "POST",
+        url: "cliente/cancelarPedido.php?completado",
+        data: {
+            localizador: localizador
+        },
+        success: function( data ) {
+            Materialize.toast("Muchas gracias por todo el apoyo!", 3000, 'green rounded');
+            todosPedidos();
+        }
+    })
+}
+
+function cancelarPedido(localizador, id){
+    $.ajax({
+        url: 'cliente/cancelarPedido.php',
+        method: 'POST',
+        data: {
+            idLocalizador: localizador,
+            idUsr: id
+        },
+        success: function(data){
+            data = JSON.parse(data);
+            console.log(data["pedido"]);
+            if(data["pedido"]==4){
+                Materialize.toast(data["msg"], 3000, 'green rounded');
+                todosPedidos();
+            }else{
+                Materialize.toast(data["msg"], 3000, 'red rounded');
+            }
+        }
+    })
+}
+
+function nosotros(){
+    $.ajax({
+        type: "GET",
+        url: "form/nosotros.php",
+        success: function( data ) {
+            $(".contenido").html(data);
+        }
+    })
+}
+
+
+
+
+function editarU(){
+    $.ajax({
+        url: 'form/editarU.php',
+        method: 'POST',
+        data: {
+
+        },
+        success: function(data){
+            $(".contenido").html(data);
+            breadcrumControl(true,"Editar Perfil");
         }
     })
 }
