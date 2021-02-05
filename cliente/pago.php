@@ -29,11 +29,11 @@
                     <div class="collapsible-body">
                         <div class="row">
                             <div class="input-field col s12 m8">
-                                <input placeholder="Calle y número, apartado de correos" id="direccion" type="text" class="validate">
+                                <input placeholder="Av, Jr, Calle, etc" id="direccion" type="text" class="validate">
                                 <label for="direccion">Dirección</label>
                             </div>
                             <div class="input-field col s12 m4">
-                                <input placeholder="Apartamente,unidad,edificio,piso,numero, etc" id="numero" type="text" class="validate">
+                                <input placeholder="Edificio, Piso, Número, etc" id="numero" type="text" class="validate">
                                 <label for="numero">Número</label>
                             </div>
                         </div>

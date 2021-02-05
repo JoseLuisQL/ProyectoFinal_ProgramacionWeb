@@ -32,7 +32,13 @@
         <h3 style="color:green">Descripción</h3>
         <p class="col s12 letra-roboco"><?=$dato["descripJuego"]?></p>
     </div>
+
+
+
     <div class="center-align">
-        <iframe width="80%" height="500" src="img/lol.gif" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+      <img src="img/consolas-promos.png" class="img-fluid" alt="Responsive image">
     </div>
+
+
+    
 </div>

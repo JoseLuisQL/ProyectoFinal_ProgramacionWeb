@@ -19,8 +19,8 @@ if(isset($_GET["todo"])){
 }
 if(isset($_GET["nsw"])){
     $pagina = $_GET["pagina"] ?? 1;
-    $nombrePlt = 'nsw';
-    $filtro = '3';
+    $nombrePlt = 'NSW';
+    $filtro = '36';
     $limit = $_GET["filtro"] ?? 4;
     $objP = new Producto;
     if(isset($_GET["init"])){
@@ -33,9 +33,9 @@ if(isset($_GET["nsw"])){
         $total_paginas = $datos[2]; 
     }
 }
-if(isset($_GET["PS4"])){
+if(isset($_GET["ps"])){
     $pagina = $_GET["pagina"] ?? 1;
-    $nombrePlt = 'PS4';
+    $nombrePlt = 'PS';
 	$filtro = '12';
 	$limit = $_GET["filtro"] ?? 4;
 	$objP = new Producto;
@@ -51,9 +51,9 @@ if(isset($_GET["PS4"])){
 
 }
 
-if(isset($_GET["XBOX"])){
+if(isset($_GET["xbox"])){
     $pagina = $_GET["pagina"] ?? 1;
-    $nombrePlt = 'XBOX ONE';
+    $nombrePlt = 'XBOX';
 	$filtro = '26';
 	$limit = $_GET["filtro"] ?? 4;
 	$objP = new Producto;
@@ -69,7 +69,7 @@ if(isset($_GET["XBOX"])){
 
 }
 
-if(isset($_GET["PC"])){
+if(isset($_GET["pc"])){
     $pagina = $_GET["pagina"] ?? 1;
     $nombrePlt = 'PC';
 	$filtro = '11';
@@ -84,14 +84,59 @@ if(isset($_GET["PC"])){
         $total_paginas = $datos[2]; 
     }
 }
-if(isset($_GET["n3ds"])){
+
+
+if(isset($_GET["tarjetas"])){
+    $pagina = $_GET["pagina"] ?? 1;
+    $nombrePlt = 'TARJETAS DE REGALO';
+	$filtro = '33';
+	$limit = $_GET["filtro"] ?? 4;
+	$objP = new Producto;
+	if(isset($_GET["init"])){
+        $reg = $objP->filtroInicio($filtro, $limit, $nombrePlt);
+    }else{
+        $datos = $objP->obtenerProductos($filtro, $limit, $nombrePlt,$pagina);
+        $reg = $datos[0]; 
+        $total = $datos[1]; 
+        $total_paginas = $datos[2]; 
+    }
 }
-if(isset($_GET["reserva"])){
-  
-}
+
 if(isset($_GET["accesorios"])){
-    
+    $pagina = $_GET["pagina"] ?? 1;
+    $nombrePlt = 'ACCESORIOS';
+	$filtro = '37';
+	$limit = $_GET["filtro"] ?? 4;
+	$objP = new Producto;
+	if(isset($_GET["init"])){
+        $reg = $objP->filtroInicio($filtro, $limit, $nombrePlt);
+    }else{
+        $datos = $objP->obtenerProductos($filtro, $limit, $nombrePlt,$pagina);
+        $reg = $datos[0]; 
+        $total = $datos[1]; 
+        $total_paginas = $datos[2]; 
+    }
 }
+
+if(isset($_GET["licencias"])){
+    $pagina = $_GET["pagina"] ?? 1;
+    $nombrePlt = 'LICENCIAS DE SOFTWARE';
+	$filtro = '34';
+	$limit = $_GET["filtro"] ?? 4;
+	$objP = new Producto;
+	if(isset($_GET["init"])){
+        $reg = $objP->filtroInicio($filtro, $limit, $nombrePlt);
+    }else{
+        $datos = $objP->obtenerProductos($filtro, $limit, $nombrePlt,$pagina);
+        $reg = $datos[0]; 
+        $total = $datos[1]; 
+        $total_paginas = $datos[2]; 
+    }
+}
+
+
+
+
 if(isset($_GET["vendidos"])){
     $objP = new Producto;
     $reg = $objP->masvendidos();
@@ -115,10 +160,6 @@ if($reg == NULL || $reg->num_rows == 0){
     ?>
     <div class="container">
         <div class="row">
-            <div class="col s12 m12">
-                <center><h3></h3></center>
-                <img src="" width="100%" height="100%"/>
-            </div>
         </div>
     </div>
     <?php
@@ -163,4 +204,44 @@ if($reg == NULL || $reg->num_rows == 0){
     </div>
 </div>
     
-   
+<?php
+
+if($total_paginas != 1){
+
+?>
+<div class="center" style="padding: 15px">
+<ul class="pagination">
+        <?php if($pagina == 1){ ?>
+            <li class="disabled"><a><i class="material-icons">chevron_left</i></a></li>
+        <?php } else { ?>
+            <li class="waves-effect"><a onclick="vistaPtl('<?=$nombrePlt?>','<?=$limit?>','<?=$pagina-1?>')"><i class="material-icons">chevron_left</i></a></li>
+        <?php }
+        ?>
+    <?php
+        $i = 1;
+        while($i<=$total_paginas){
+            if($i == $pagina){
+                ?>
+                <li class="active"><a><?=$i?></a></li>
+                <?php
+            }else{
+            ?>
+
+            <li class="waves-effect"><a onclick="vistaPtl('<?=$nombrePlt?>','<?=$limit?>','<?=$i?>')"><?=$i?></a></li>
+            <?php
+            }
+            $i++;
+        }
+    ?>
+    <?php if($pagina == $total_paginas){ ?>
+            <li class="disabled"><a><i class="material-icons">chevron_right</i></a></li>
+        <?php } else { ?>
+            <li class="waves-effect"><a onclick="vistaPtl('<?=$nombrePlt?>','<?=$limit?>','<?=$pagina+1?>')"><i class="material-icons">chevron_right</i></a></li>
+        <?php }
+    ?>
+
+</ul>
+<?php } ?>
+
+</div>
+

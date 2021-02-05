@@ -1,3 +1,4 @@
+
 <div class="row">
 	<div class="slider ">
 		<ul class="slides">
@@ -5,13 +6,13 @@
 				<img src="img/banner4.jpg">
 				<div class="caption center-align">
 					<h3>¡Bienvenido a Cosmo Games!</h3>
-					<h5 class="light grey-text text-lighten-3">A la que será tu tienda favorita.</h5>
+					<h5 class="light grey-text text-lighten-3">Si para ti ser gamer es un estilo de vida, este es tu lugar favorito</h5>
 				</div>
 			</li>
 			<li>
-				<img src="img/banner5.jpg">
+				<img src="img/bannerps51.png">
 				<div class="caption left-align">
-					<h3 class="light grey-text text-lighten-3">COMPRA TUS JUEGOS FAVORITOS AL MEJOR PRECIO DEL MERCADO</h3>
+					
 				</div>
 			</li>
 			<li>

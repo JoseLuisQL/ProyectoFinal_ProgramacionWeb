@@ -20,7 +20,7 @@
 			<div align="center">
 				<img class="circle" src="login2.png"></a>
 				<div class="letra-semimediana"><?=unserialize($_SESSION['datos'])[0]?> <?=unserialize($_SESSION['datos'])[1]?></div>
-				<div class="letra-negrita">@<?=$_SESSION["usr"] ?></div>
+				<div class="letra-negrita">#<?=$_SESSION["usr"] ?></div>
 			</div>
 		</div>
 	</li>
@@ -34,6 +34,7 @@
 			<li><a class="letra-negrita" onclick="pedidosPendiente()"><i class="material-icons">loyalty</i>Pedidos pendientes</a></li>
 			<li><a class="letra-negrita" onclick="todosPedidos()"><i class="material-icons">history</i>Historial de pedidos</a></li>
 			<li><a class="letra-negrita" onclick="ayudar()"><i class="material-icons">message</i>Soporte técnico</a></li>
+
 		<?php }
 	?>
 	<li><div class="divider"></div></li>

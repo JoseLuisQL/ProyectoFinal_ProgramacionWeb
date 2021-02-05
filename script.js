@@ -15,6 +15,24 @@ $(document).ready(function(){
     home();
     var tarjeta = false;
     
+
+    $( ".busInicio" ).keypress(function() {
+        if($(".busInicio").val().length > 2){
+            $(".contenido").html(preload);
+            setTimeout(function() {
+                $.ajax({
+                    type: "POST",
+                    url: "infoInicio.php?buscar",
+                    data: {
+                        texto: $(".busInicio").val()
+                    },
+                    success: function( response ) {
+                        $(".contenido").html(response);
+                    }
+                })
+            }, 900);
+        }
+    });
     
 
     $('.perfil-navbar').sideNav({
@@ -148,10 +166,10 @@ function home(){
                     $("#salidaIndex").html(result);
                 }
             });
-            $.ajax({url: "infoInicio.php?ps4&init", success: function(result){
+            $.ajax({url: "infoInicio.php?ps&init", success: function(result){
                 $("#psIndex").html(result);
             }});
-            $.ajax({url: "infoInicio.php?xone&init", success: function(result){
+            $.ajax({url: "infoInicio.php?xbox&init", success: function(result){
                 $("#xboxIndex").html(result);
             }});
             $.ajax({url: "infoInicio.php?pc&init", success: function(result){
@@ -181,16 +199,6 @@ function limpiarBreadcrum(){
 
 
 
-function breadcrumControl(limpiar = null,plataforma = null, nombre = null){ 
-    if(limpiar != null) {
-        $("").remove();
-        $("").remove();
-        console.log("borro breadcrum");
-    }
-    
-
-}
-
 
 function breadcrumControl(limpiar = null,plataforma = null, nombre = null){ 
   
@@ -209,6 +217,23 @@ function breadcrumControl(limpiar = null,plataforma = null, nombre = null){
     }
 
 }
+
+
+function getCookie(cname) {
+    var name = cname + "=";
+    var ca = document.cookie.split(';');
+    for(var i = 0; i < ca.length; i++) {
+        var c = ca[i];
+        while (c.charAt(0) == ' ') {
+            c = c.substring(1);
+        }
+        if (c.indexOf(name) == 0) {
+            return true;
+        }
+    }
+    return false;
+}
+
 
 
 function infoVersion(idJ, nombre, plataforma, reset=null){ 
@@ -243,9 +268,9 @@ function cargarPerfil(){
         url: "perfil.php",
         success: function(result){
             $(".navPerfil").html(result);
-            $.ajax({url: "",
+            $.ajax({url: "cliente/carroPerfil.php",
                 success: function(result){
-                    $("").html(result);
+                    $(".carritoP").html(result);
                 }
             });
         }
@@ -442,7 +467,7 @@ function ayudar(){
             $(document).ready(function(){
                 $('ul.tabs').tabs();
             });
-            $('#mensaje').val('Cual es tu consulta: ');
+            $('#mensaje').val('¿Cual es tu consulta?: ');
             $('#mensaje').trigger('autoresize');
             Materialize.updateTextFields();
         }
@@ -529,3 +554,5 @@ function editarU(){
         }
     })
 }
+
+
